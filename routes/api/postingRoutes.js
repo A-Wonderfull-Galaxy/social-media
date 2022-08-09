@@ -1,23 +1,26 @@
 const router = require("express").Router();
+
 const {
     getAllPostings,
     getPostingById,
     createPosting,
-    addReaction,
     updatePosting,
     deletePosting,
+    addReaction,
+    deleteReaction
 } = require("../../controllers/postingController");
 
-router.route("/").get(getAllPostings);
+router.route("/")
+    .get(getAllPostings)
+    .post(createPosting);
 
-router.route("/:userId").post(createPosting);
-
-router
-    .route("/:id")
+router.route("/:id")
     .get(getPostingById)
     .put(updatePosting)
     .delete(deletePosting);
 
-router.route("/:id/reactions").post(addReaction);
+router.route("/:id/reactions")
+    .post(addReaction)
+    .delete(deleteReaction);
 
 module.exports = router;
